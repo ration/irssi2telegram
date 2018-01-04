@@ -247,7 +247,13 @@ sub telegram_signal {
 	$last_target = $target;
 	$last_server = $server;
 	$servers{$target} = $server;
-	telegram_send_message($user, "${from}: ${msg}");
+        my $to = $user;
+        if ($target eq "#olutopas") {
+	    $to = '@olutopas';
+	    telegram_send_message($to, "${nick}: ${msg}");
+	} else {
+	    telegram_send_message($user, "${from}: ${msg}");
+	}
 }
 
 sub telegram_signal_private {
